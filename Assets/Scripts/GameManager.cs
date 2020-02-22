@@ -8,6 +8,25 @@ public class GameManager : MonoBehaviour
 {
     [SerializeField] GameObject GameOverText;
     [SerializeField] GameObject GameClearText;
+    [SerializeField] Text scoreText;
+
+    const int MAX_VALUE = 9999;
+    int score = 0;
+
+    private void Start()
+    {
+        scoreText.text = score.ToString();
+    }
+
+    public void AddScore(int val)
+    {
+        score += val;
+        if (score > MAX_VALUE)
+        {
+            score = MAX_VALUE;
+        }
+        scoreText.text = score.ToString();
+    }
 
     public void GameOver()
     {
