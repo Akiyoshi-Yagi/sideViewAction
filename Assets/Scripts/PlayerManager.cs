@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class PlayerManager : MonoBehaviour
 {
+    [SerializeField] GameManager gameManager;
     [SerializeField] LayerMask blockLayer;
 
     public enum DIRECTION_TYPE
@@ -80,5 +81,20 @@ public class PlayerManager : MonoBehaviour
         Debug.DrawLine(rightStartPoint, endPoint);
 
         return Physics2D.Linecast(leftStartPoint, endPoint, blockLayer) || Physics2D.Linecast(rightStartPoint, endPoint, blockLayer);
+    }
+
+    //trigerにぶつかった時に自動で発動される関数
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if(collision.gameObject.tag == "Trap")
+        {
+            gameManager.GameOver();
+            Debug.Log("game over");
+        }
+        if (collision.gameObject.tag == "Finish")
+        {
+            gameManager.GameClear();
+            Debug.Log("game clear");
+        }
     }
 }
