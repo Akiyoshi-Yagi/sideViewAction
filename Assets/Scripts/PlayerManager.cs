@@ -100,6 +100,20 @@ public class PlayerManager : MonoBehaviour
         {
             //アイテム取得
             collision.gameObject.GetComponent<ItemManager>().GetItem();
+
+        }
+        if (collision.gameObject.tag == "Enemy")
+        {
+            EnemyManager enemy = collision.gameObject.GetComponent<EnemyManager>();
+            if (this.transform.position.y +0.2f > enemy.transform.position.y )
+            {
+                enemy.DestroyEnemy();
+            }
+            else
+            {
+                Destroy(this.gameObject);
+                gameManager.GameOver();
+            }
         }
     }
 }
