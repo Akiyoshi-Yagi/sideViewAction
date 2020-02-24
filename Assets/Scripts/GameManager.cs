@@ -31,13 +31,13 @@ public class GameManager : MonoBehaviour
     public void GameOver()
     {
         GameOverText.SetActive(true);
-        Invoke("RestartScene", 1.5f);
+        Invoke("RestartScene", 1.2f);
 
     }
     public void GameClear()
     {
         GameClearText.SetActive(true);
-        Invoke("RestartScene", 1.5f);
+        Invoke("RestartScene", 1.0f);
     }
 
     void RestartScene()

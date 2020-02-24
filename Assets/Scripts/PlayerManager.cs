@@ -19,8 +19,8 @@ public class PlayerManager : MonoBehaviour
     Rigidbody2D rigidbody2D;
     Animator animator;
 
-
     float jumpPower = 500;
+    bool isDead = false;
 
     void Start()
     {
@@ -30,6 +30,10 @@ public class PlayerManager : MonoBehaviour
 
     private void Update()
     {
+        if (isDead)
+        {
+            return;
+        }
         float x = Input.GetAxis("Horizontal");
         animator.SetFloat("Speed", Mathf.Abs(x));
 
@@ -62,6 +66,10 @@ public class PlayerManager : MonoBehaviour
     }
     void FixedUpdate()
     {
+        if (isDead)
+        {
+            return;
+        }
         switch (direction)
         {
             case DIRECTION_TYPE.STOP:
@@ -100,15 +108,19 @@ public class PlayerManager : MonoBehaviour
     //trigerにぶつかった時に自動で発動される関数
     private void OnTriggerEnter2D(Collider2D collision)
     {
+        if (isDead)
+        {
+            return;
+        }
         if(collision.gameObject.tag == "Trap")
         {
-            gameManager.GameOver();
-            Debug.Log("game over");
+            PlayerDeath();
+            //Debug.Log("game over");
         }
         if (collision.gameObject.tag == "Finish")
         {
             gameManager.GameClear();
-            Debug.Log("game clear");
+            //Debug.Log("game clear");
         }
         if(collision.gameObject.tag == "Item")
         {
@@ -127,9 +139,20 @@ public class PlayerManager : MonoBehaviour
             }
             else
             {
-                Destroy(this.gameObject);
-                gameManager.GameOver();
+                
+                PlayerDeath();
             }
         }
+    }
+
+    void PlayerDeath()
+    {
+        rigidbody2D.velocity = new Vector2(0, 0);
+        Jump();
+        animator.Play("PlayerDeathAnimation");
+        isDead = true;
+        BoxCollider2D boxCollider2D = GetComponent<BoxCollider2D>();
+        Destroy(boxCollider2D);
+        gameManager.GameOver();
     }
 }
