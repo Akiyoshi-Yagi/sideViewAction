@@ -5,6 +5,7 @@ using UnityEngine;
 public class EnemyManager : MonoBehaviour
 {
     [SerializeField] LayerMask blockLayer;
+    [SerializeField] GameObject deathEffect;
 
     public enum DIRECTION_TYPE
     {
@@ -74,6 +75,8 @@ public class EnemyManager : MonoBehaviour
 
     public void DestroyEnemy()
     {
+        //prefabを発生させる
+        Instantiate(deathEffect, this.transform.position, this.transform.rotation);
         Destroy(this.gameObject);
     }
 

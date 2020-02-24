@@ -46,10 +46,19 @@ public class PlayerManager : MonoBehaviour
             direction = DIRECTION_TYPE.LEFT;
         }
 
-        if (IsGround() && Input.GetKeyDown("space"))
+        if (IsGround())
         {
-            Jump();
+            if (Input.GetKeyDown("space"))
+            {
+                Jump();
+                animator.SetBool("IsJumping", true);
+            }
+            else
+            {
+                animator.SetBool("IsJumping", false);
+            }
         }
+    
     }
     void FixedUpdate()
     {
@@ -113,6 +122,8 @@ public class PlayerManager : MonoBehaviour
             if (this.transform.position.y +0.2f > enemy.transform.position.y )
             {
                 enemy.DestroyEnemy();
+                rigidbody2D.velocity = new Vector2(rigidbody2D.velocity.x, 0);
+                Jump();
             }
             else
             {
