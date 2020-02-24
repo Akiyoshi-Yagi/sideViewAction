@@ -14,19 +14,24 @@ public class PlayerManager : MonoBehaviour
         RIGHT,
     }
     DIRECTION_TYPE direction = DIRECTION_TYPE.STOP;
+
     float speed;
     Rigidbody2D rigidbody2D;
+    Animator animator;
+
 
     float jumpPower = 500;
 
     void Start()
     {
         rigidbody2D = GetComponent<Rigidbody2D>();
+        animator = GetComponent<Animator>();
     }
 
-    void Update()
+    private void Update()
     {
         float x = Input.GetAxis("Horizontal");
+        animator.SetFloat("Speed", Mathf.Abs(x));
 
         if (x == 0)
         {
@@ -54,11 +59,11 @@ public class PlayerManager : MonoBehaviour
                 speed = 0;
                 break;
             case DIRECTION_TYPE.RIGHT:
-                speed = 3;
+                speed = 2.5f;
                 transform.localScale = new Vector3(1, 1, 1);
                 break;
             case DIRECTION_TYPE.LEFT:
-                speed = -3;
+                speed = -2.5f;
                 transform.localScale = new Vector3(-1, 1, 1);
                 break;
         }
