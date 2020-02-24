@@ -17,7 +17,7 @@ public class PlayerManager : MonoBehaviour
     float speed;
     Rigidbody2D rigidbody2D;
 
-    float jumpPower = 400;
+    float jumpPower = 600;
 
     void Start()
     {
