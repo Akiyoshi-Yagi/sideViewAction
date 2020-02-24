@@ -76,11 +76,11 @@ public class PlayerManager : MonoBehaviour
                 speed = 0;
                 break;
             case DIRECTION_TYPE.RIGHT:
-                speed = 2.5f;
+                speed = 10f;
                 transform.localScale = new Vector3(1, 1, 1);
                 break;
             case DIRECTION_TYPE.LEFT:
-                speed = -2.5f;
+                speed = -10f;
                 transform.localScale = new Vector3(-1, 1, 1);
                 break;
         }
@@ -142,6 +142,12 @@ public class PlayerManager : MonoBehaviour
                 
                 PlayerDeath();
             }
+        }
+        if(collision.gameObject.tag == "Jump")
+        {
+            Jump();
+            Jump();
+            Jump();
         }
     }
 
