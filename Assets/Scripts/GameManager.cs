@@ -10,12 +10,20 @@ public class GameManager : MonoBehaviour
     [SerializeField] GameObject GameClearText;
     [SerializeField] Text scoreText;
 
+    //SE
+    [SerializeField] AudioClip gameClearSE;
+    [SerializeField] AudioClip gameOverSE;
+    AudioSource audioSource;
+
+
+
     const int MAX_VALUE = 9999;
     int score = 0;
 
     private void Start()
     {
         scoreText.text = score.ToString();
+        audioSource = GetComponent<AudioSource>();
     }
 
     public void AddScore(int val)
@@ -31,12 +39,14 @@ public class GameManager : MonoBehaviour
     public void GameOver()
     {
         GameOverText.SetActive(true);
+        audioSource.PlayOneShot(gameOverSE);
         Invoke("RestartScene", 1.2f);
 
     }
     public void GameClear()
     {
         GameClearText.SetActive(true);
+        audioSource.PlayOneShot(gameClearSE);
         Invoke("RestartScene", 1.0f);
     }
 

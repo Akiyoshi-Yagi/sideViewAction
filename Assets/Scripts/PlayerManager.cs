@@ -6,6 +6,11 @@ public class PlayerManager : MonoBehaviour
 {
     [SerializeField] GameManager gameManager;
     [SerializeField] LayerMask blockLayer;
+    [SerializeField] AudioClip getItemSE;
+    [SerializeField] AudioClip jumpSE;
+    [SerializeField] AudioClip stampSE;
+
+    AudioSource audioSource;
 
     public enum DIRECTION_TYPE
     {
@@ -26,6 +31,7 @@ public class PlayerManager : MonoBehaviour
     {
         rigidbody2D = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
+        audioSource = GetComponent<AudioSource>();
     }
 
     private void Update()
@@ -76,11 +82,11 @@ public class PlayerManager : MonoBehaviour
                 speed = 0;
                 break;
             case DIRECTION_TYPE.RIGHT:
-                speed = 3f;
+                speed = 5f;
                 transform.localScale = new Vector3(1, 1, 1);
                 break;
             case DIRECTION_TYPE.LEFT:
-                speed = -3f;
+                speed = -5f;
                 transform.localScale = new Vector3(-1, 1, 1);
                 break;
         }
@@ -89,6 +95,7 @@ public class PlayerManager : MonoBehaviour
 
     void Jump()
     {
+        audioSource.PlayOneShot(jumpSE);
         rigidbody2D.AddForce(Vector2.up * jumpPower);
     }
 
@@ -125,6 +132,7 @@ public class PlayerManager : MonoBehaviour
         if(collision.gameObject.tag == "Item")
         {
             //アイテム取得
+            audioSource.PlayOneShot(getItemSE);
             collision.gameObject.GetComponent<ItemManager>().GetItem();
 
         }
@@ -133,9 +141,10 @@ public class PlayerManager : MonoBehaviour
             EnemyManager enemy = collision.gameObject.GetComponent<EnemyManager>();
             if (this.transform.position.y +0.2f > enemy.transform.position.y )
             {
+                audioSource.PlayOneShot(stampSE);
                 enemy.DestroyEnemy();
                 rigidbody2D.velocity = new Vector2(rigidbody2D.velocity.x, 0);
-                Jump();
+                rigidbody2D.AddForce(Vector2.up * jumpPower);
             }
             else
             {
