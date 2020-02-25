@@ -1,11 +1,11 @@
 ﻿<Properties StartupConfiguration="{AE2E32BA-1C5A-3E70-F3AE-09CA872CD56D}|">
   <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Scripts/EnemyDeathEffect.cs">
     <Files>
-      <File FileName="Assets/Scripts/PlayerManager.cs" Line="128" Column="17" />
-      <File FileName="Assets/Scripts/GameManager.cs" Line="16" Column="25" />
-      <File FileName="Assets/Scripts/ItemManager.cs" Line="8" Column="1" />
+      <File FileName="Assets/Scripts/PlayerManager.cs" Line="146" Column="1" />
+      <File FileName="Assets/Scripts/GameManager.cs" Line="40" Column="38" />
+      <File FileName="Assets/Scripts/ItemManager.cs" Line="11" Column="82" />
       <File FileName="Assets/Scripts/EnemyManager.cs" Line="84" Column="8" />
-      <File FileName="Assets/Scripts/EnemyDeathEffect.cs" Line="7" Column="10" />
+      <File FileName="Assets/Scripts/EnemyDeathEffect.cs" Line="12" Column="1" />
     </Files>
     <Pads>
       <Pad Id="ProjectPad">
